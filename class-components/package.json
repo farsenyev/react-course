@@ -17,6 +17,7 @@
   "dependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-router-dom": "^6.24.1",
     "swapi-node": "^0.7.0"
   },
   "lint-staged": {
