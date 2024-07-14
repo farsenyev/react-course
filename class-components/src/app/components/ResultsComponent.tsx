@@ -1,18 +1,27 @@
 import React from 'react';
 
-interface Props {
-  items: { name: string; description: string }[];
+interface Item {
+  name: string;
+  description: string;
 }
 
-export const ResultsComponent: React.FC<Props> = ({ items }) => {
+interface Props {
+  items: (string | Item)[];
+  onSelectItem: (item: string | Item) => void;  // Function to call when an item is clicked
+}
+
+export const ResultsComponent: React.FC<Props> = ({ items, onSelectItem }) => {
   return (
-    <div>
-      {items.map((item, index) => (
-        <div key={index}>
-          <h3>{item.name || item}</h3>
-          <p>{item.description}</p>
-        </div>
-      ))}
-    </div>
+      <div>
+        {items.length === 0 ? (
+            <p>No cards available</p>
+        ) : (
+            items.map((item, index) => (
+                <div key={index} onClick={() => onSelectItem(item)} style={{ cursor: 'pointer' }}>
+                  <h3>{typeof item === 'string' ? item : item.name}</h3>
+                </div>
+            ))
+        )}
+      </div>
   );
 };
