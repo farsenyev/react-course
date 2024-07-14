@@ -28,7 +28,6 @@ export const MainComponent = () => {
                 .then((data) => {
                     let newItems;
                     if ('results' in data) {
-                        console.log(data)
                         newItems = data.results.map((item) => ({
                             ...item,
                             category: apiUrl.split('/')[4],
@@ -49,8 +48,7 @@ export const MainComponent = () => {
 
     const handleSelectItem = item => {
         setSelectedItem(item);
-        console.log(item)
-        navigate(`/search/${item.category}/${item.id}`, {replace: false});
+        navigate(`/search/${item.category}/${item.id}`, {replace: true});
     };
 
     return (
@@ -58,19 +56,13 @@ export const MainComponent = () => {
             <div style={{ flex: '0 1 100px', background: '#eee' }}>
                 <SearchComponent onSearch={(term, pageNumber) => fetchItems(term, pageNumber, navigate)} />
             </div>
-            <div style={{ flex: 1, overflow: 'auto', display: "flex", flexDirection: "row" }}>
-                <div>
-                    <Routes>
-                        <Route path="/search" element={loading ? <div className="loader"/> : <ResultsComponent items={items}  onSelectItem={handleSelectItem}/>} />
-                        <Route path="/search/:category" element={loading ? <div className="loader"/> : <ResultsComponent items={items}  onSelectItem={handleSelectItem} />} >
-                            <Route path=":category/:id" element={<DetailComponent item={selectedItem}/> } />
-                        </Route>
-                        <Route path="/404" element={<NotFoundPage /> && <Navigate to="/404" replace />} />
-                        <Route path="*" element={<Navigate to="/404" replace />} />
-                    </Routes>
-                </div>
-                <Outlet />
-            </div>
+            <Routes>
+                <Route path="/search" element={<ResultsComponent items={items} onSelectItem={handleSelectItem} />} />
+                <Route path="/search/:category" element={<ResultsComponent items={items} onSelectItem={handleSelectItem}/>} />
+                <Route path="/search/:category/:id" element={<DetailComponent />} />
+                <Route path="/404" element={<NotFoundPage />} />
+                <Route path="*" element={<Navigate to="/404" replace />} />
+            </Routes>
         </div>
     );
 };

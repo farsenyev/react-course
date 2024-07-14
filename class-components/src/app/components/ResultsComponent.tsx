@@ -7,7 +7,7 @@ interface Item {
 
 interface Props {
   items: (string | Item)[];
-  onSelectItem: (item: string | Item) => void;  // Function to call when an item is clicked
+  onSelectItem: (item: string | Item) => void;
 }
 
 export const ResultsComponent: React.FC<Props> = ({ items, onSelectItem }) => {
