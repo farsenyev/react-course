@@ -12,6 +12,10 @@ export const DetailComponent: React.FC = () => {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
+    if (id === undefined || category === undefined) {
+        return;
+    }
+
     const fetchDetails = async (url: string) => {
         const response = await fetch(url);
         return response.json();
@@ -36,15 +40,15 @@ export const DetailComponent: React.FC = () => {
     }, [id, category]);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div className={'details'}>Loading...</div>;
     }
 
     if (!item) {
-        return <div>No details available.</div>;
+        return <div className={'details'}>Loading</div>;
     }
 
     return (
-        <div>
+        <div className={'details'}>
             <button onClick={() => navigate(-1)}>Close</button>
             <h1>{item.name}</h1>
             <p>Films: {item.films.join(', ')}</p>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { SearchComponent } from '../app/components/SearchComponent';
+import { SearchComponent } from '../app/components/header/SearchComponent';
 import { BrowserRouter } from 'react-router-dom';
 
 test('updates URL query parameter when page changes', () => {

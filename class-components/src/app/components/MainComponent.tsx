@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from "react";
-import {Navigate, Route, Routes, useNavigate, Outlet} from "react-router-dom";
+import {useNavigate, Outlet, useParams, Routes, Route} from "react-router-dom";
 import {Data} from "../interfaces/index";
-import {SearchComponent} from "./SearchComponent";
+import {SearchComponent} from "./header/SearchComponent";
 import {ResultsComponent} from "./ResultsComponent";
-import {NotFoundPage} from "./NotFoundPage";
-import {DetailComponent} from "./DetailedComponent";
 import '../App.css'
+import {DetailComponent} from "./DetailedComponent";
 
 export const MainComponent = () => {
+    const { category } = useParams();
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
@@ -46,23 +46,18 @@ export const MainComponent = () => {
         }, 100);
     };
 
-    const handleSelectItem = item => {
-        setSelectedItem(item);
-        navigate(`/search/${item.category}/${item.id}`, {replace: true});
-    };
+    const handleSelectedItem = (item) => {
+        navigate(`/${category}/${item.id}`)
+    }
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
-            <div style={{ flex: '0 1 100px', background: '#eee' }}>
+        <div className={'main-container'}>
+            <div className={'header'}>
                 <SearchComponent onSearch={(term, pageNumber) => fetchItems(term, pageNumber, navigate)} />
             </div>
-            <Routes>
-                <Route path="/search" element={<ResultsComponent items={items} onSelectItem={handleSelectItem} />} />
-                <Route path="/search/:category" element={<ResultsComponent items={items} onSelectItem={handleSelectItem}/>} />
-                <Route path="/search/:category/:id" element={<DetailComponent />} />
-                <Route path="/404" element={<NotFoundPage />} />
-                <Route path="*" element={<Navigate to="/404" replace />} />
-            </Routes>
+            <div>
+                <ResultsComponent items={items} onSelectItem={handleSelectedItem}/>
+            </div>
         </div>
     );
 };

@@ -1,8 +1,11 @@
 import React from 'react';
+import { Outlet } from "react-router-dom";
 
 interface Item {
   name: string;
   description: string;
+  category: string;
+  id: string;
 }
 
 interface Props {
@@ -12,16 +15,17 @@ interface Props {
 
 export const ResultsComponent: React.FC<Props> = ({ items, onSelectItem }) => {
   return (
-      <div>
-        {items.length === 0 ? (
-            <p>No cards available</p>
-        ) : (
-            items.map((item, index) => (
-                <div key={index} onClick={() => onSelectItem(item)} style={{ cursor: 'pointer' }}>
-                  <h3>{typeof item === 'string' ? item : item.name}</h3>
-                </div>
-            ))
-        )}
+      <div className={'result-container'}>
+          <div className={'results'}>
+            {!items ? (<p></p>) : (
+                items.map((item, index) => (
+                    <div key={index} onClick={() => onSelectItem(item)} style={{ cursor: 'pointer' }}>
+                      <h3>{typeof item === 'string' ? item : item.name}</h3>
+                    </div>
+                ))
+            )}
+          </div>
+        <Outlet/>
       </div>
   );
 };

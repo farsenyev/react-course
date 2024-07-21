@@ -11,3 +11,50 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+.main-container{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.header{
+    flex: 0 1 60px;
+    background: #eee;
+}
+
+.header-container{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.pagination-container{
+    display: flex;
+    flex-direction: row;
+    gap: 10px
+}
+
+.pagination-number{
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+h4{
+    margin: 0;
+}
+
+.result-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.results{
+
+}
+.details{
+    background: #000066;
+}
