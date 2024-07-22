@@ -1,6 +1,6 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import {useTheme} from "../../context/ThemeContext";
 
 interface Props {
   onSearch: (searchTerm: string, pageNumber: number) => void
@@ -11,6 +11,7 @@ export const SearchComponent: React.FC<Props> = ({ onSearch }) => {
     localStorage.getItem('searchTerm') || '',
   );
   const [pageNumber, setPage] = useState(1);
+  const theme = useTheme()
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -49,7 +50,8 @@ export const SearchComponent: React.FC<Props> = ({ onSearch }) => {
   };
 
   const changeTheme = () => {
-    console.log('theme changed')
+    console.log(`${theme.theme} changed`)
+    theme.toggleTheme()
   }
 
   return (
@@ -69,7 +71,13 @@ export const SearchComponent: React.FC<Props> = ({ onSearch }) => {
           <h4>{pageNumber}</h4></div>
         <button onClick={handleNext}>Next</button>
       </div>
-      <button onClick={changeTheme}>Change theme</button>
+      {/*<button onClick={changeTheme}>Change theme</button>*/}
+      <div className="checkbox-wrapper-22">
+        <label className="switch" htmlFor="checkbox">
+          <input type="checkbox" id="checkbox" onChange={theme.toggleTheme}/>
+          <div className="slider round"/>
+        </label>
+      </div>
       <button onClick={throwError}>Throw Error</button>
     </div>
   );

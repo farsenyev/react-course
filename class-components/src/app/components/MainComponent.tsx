@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
-import {useNavigate, Outlet, useParams, Routes, Route} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {Data} from "../interfaces/index";
 import {SearchComponent} from "./header/SearchComponent";
 import {ResultsComponent} from "./ResultsComponent";
 import '../App.css'
-import {DetailComponent} from "./DetailedComponent";
+import {ThemeProvider} from "../context/ThemeContext";
 
 export const MainComponent = () => {
     const { category } = useParams();
@@ -51,13 +51,15 @@ export const MainComponent = () => {
     }
 
     return (
-        <div className={'main-container'}>
-            <div className={'header'}>
-                <SearchComponent onSearch={(term, pageNumber) => fetchItems(term, pageNumber, navigate)} />
+        <ThemeProvider>
+            <div className={'main-container'}>
+                <div className={'header'}>
+                    <SearchComponent onSearch={(term, pageNumber) => fetchItems(term, pageNumber, navigate)} />
+                </div>
+                <div>
+                    <ResultsComponent items={items} onSelectItem={handleSelectedItem}/>
+                </div>
             </div>
-            <div>
-                <ResultsComponent items={items} onSelectItem={handleSelectedItem}/>
-            </div>
-        </div>
+        </ThemeProvider>
     );
 };
