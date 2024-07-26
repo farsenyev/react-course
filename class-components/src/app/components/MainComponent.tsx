@@ -1,65 +1,44 @@
-import React, {useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
-import {Data} from "../interfaces/index";
-import {SearchComponent} from "./header/SearchComponent";
-import {ResultsComponent} from "./ResultsComponent";
-import '../App.css'
-import {ThemeProvider} from "../context/ThemeContext";
+import React, { useEffect, useState } from 'react';
+import { SearchComponent } from './header/SearchComponent';
+import { ResultsComponent } from './result/ResultsComponent';
+import '../App.css';
+import { ThemeProvider } from '../context/ThemeContext';
+import {useGetDetailsQuery, useGetItemsQuery} from "../service/ItemService";
+import {useLocalStorage} from "../hooks/useLocalStorage";
+import {useNavigate} from "react-router-dom";
 
 export const MainComponent = () => {
-    const { category } = useParams();
-    const [items, setItems] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [selectedItem, setSelectedItem] = useState(null);
-    const navigate = useNavigate();
+  const [pageNumber, setPageNumber] = useState(null)
+  const [value, setValue] = useLocalStorage('', 'searchItem')
+  const navigate = useNavigate()
+  const {data, isLoading, isFetching} = useGetItemsQuery({item: value, page: pageNumber});
 
-    useEffect(() => {
-        const searchTerm = localStorage.getItem('searchTerm') || '';
-        let page = 1
-        fetchItems(searchTerm, page, navigate);
-    }, [navigate]);
+  if (isLoading) return <h3>Loading...</h3>
 
-    const fetchItems = (searchTerm, page, navigate) => {
-        setLoading(true);
-        const apiUrl = (searchTerm ? (page ? `https://swapi.dev/api/${searchTerm}?page=${page}` : `https://swapi.dev/api/${searchTerm}`) : 'https://swapi.dev/api/');
-        setTimeout(() => {
-            fetch(apiUrl)
-                .then(response => response.json())
-                .then((data) => {
-                    let newItems;
-                    if ('results' in data) {
-                        newItems = data.results.map((item) => ({
-                            ...item,
-                            category: apiUrl.split('/')[4],
-                            id: item.url.match(/\/api\/[a-zA-Z]+\/(\d+)/)[1]
-                        }));
-                    } else {
-                        newItems = Object.keys(data) as (keyof Data)[]
-                    }
-                    setItems(newItems);
-                })
-                .catch(error => {
-                    console.error('Failed to fetch items:', error);
-                    navigate('/404');
-                })
-                .finally(() => setLoading(false));
-        }, 100);
-    };
+  const fetchItems = (term, page) => {
+    setValue(term)
+    setPageNumber(page)
+  }
 
-    const handleSelectedItem = (item) => {
-        navigate(`/${category}/${item.id}`)
-    }
+  const handleSelectedItem = (item) => {
+    const id = item.url.match(/\/api\/[a-zA-Z]+\/(\d+)/)[1]
+    navigate(`/${value}/${id}`)
+  }
 
-    return (
-        <ThemeProvider>
-            <div className={'main-container'}>
-                <div className={'header'}>
-                    <SearchComponent onSearch={(term, pageNumber) => fetchItems(term, pageNumber, navigate)} />
-                </div>
-                <div>
-                    <ResultsComponent items={items} onSelectItem={handleSelectedItem}/>
-                </div>
-            </div>
-        </ThemeProvider>
-    );
+  return (
+    <ThemeProvider>
+      <div className={'main-container'}>
+        <div className={'header'}>
+          <SearchComponent
+            onSearch={(term, page) =>
+              fetchItems(term, page)
+            }
+          />
+        </div>
+        <div>
+          {isLoading || isFetching ? <h3 className={'loader'}>load</h3> : <ResultsComponent items={data} onSelectItem={handleSelectedItem} />}
+        </div>
+      </div>
+    </ThemeProvider>
+  );
 };

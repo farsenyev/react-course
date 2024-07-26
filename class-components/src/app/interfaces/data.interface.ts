@@ -1,4 +1,4 @@
-export interface Data {
+export interface IData {
   films: string;
   people: string;
   planets: string;

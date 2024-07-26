@@ -1,81 +1,73 @@
-import React, { useState, useEffect, ChangeEvent } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {useTheme} from "../../context/ThemeContext";
+import { useTheme } from '../../context/ThemeContext';
+import {useLocalStorage} from "../../hooks/useLocalStorage";
 
 interface Props {
-  onSearch: (searchTerm: string, pageNumber: number) => void
+  onSearch: (term: string, page: number) => void;
 }
 
 export const SearchComponent: React.FC<Props> = ({ onSearch }) => {
-  const [searchTerm, setSearchTerm] = useState<string>(
-    localStorage.getItem('searchTerm') || '',
-  );
-  const [pageNumber, setPage] = useState(1);
-  const theme = useTheme()
+  const [pageNumber, setPageNumber] = useState(1)
+  const [value, setValue] = useLocalStorage('', 'searchItem')
+  const theme = useTheme();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    localStorage.setItem('searchTerm', searchTerm);
-
-    return () => {
-      localStorage.setItem('searchTerm', searchTerm);
-    };
-  }, [searchTerm]);
-
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(event.target.value);
-  };
+      setValue(event.target.value);
+  }
 
   const handleSearch = () => {
-    onSearch(searchTerm, pageNumber);
-    navigate(`/${searchTerm}`);
-  };
+      onSearch(value, pageNumber)
+      navigate(`/${value}`);
+  }
+
+  const handlePrev = () => {
+    const prevPage = pageNumber - 1
+    setPageNumber(prevPage)
+    onSearch(value, prevPage)
+    navigate(`/${value}/?page=${prevPage}`);
+  }
 
   const handleNext = () => {
     const nextPage = pageNumber + 1;
-    setPage(nextPage);
-    onSearch(searchTerm, nextPage);
-    navigate(`/${searchTerm}?page=${nextPage}`);
-  };
-
-  const handlePrev = () => {
-    const prevPage = pageNumber > 1 ? pageNumber - 1 : 1;
-    setPage(prevPage);
-    onSearch(searchTerm, prevPage);
-    navigate(`/${searchTerm}/?page=${prevPage}`);
-  };
+    setPageNumber(nextPage);
+    onSearch(value, nextPage);
+    navigate(`/${value}/?page=${nextPage}`);
+  }
 
   const throwError = () => {
     throw new Error('Manual error triggered');
   };
 
   const changeTheme = () => {
-    console.log(`${theme.theme} changed`)
-    theme.toggleTheme()
-  }
+    theme.toggleTheme();
+  };
 
   return (
-    <div
-      className={'header-container'}
-    >
+    <div className={'header-container'}>
       <input
         type="text"
-        value={searchTerm}
+        value={value}
         onChange={handleInputChange}
         placeholder="Search here..."
       />
       <button onClick={handleSearch}>Search</button>
       <div className={'pagination-container'}>
-        <button onClick={handlePrev} disabled={pageNumber <= 1}>Prev</button>
+        <button onClick={handlePrev}
+                disabled={pageNumber <= 1}
+        >
+          Prev
+        </button>
         <div className={'pagination-number'}>
-          <h4>{pageNumber}</h4></div>
+          <h4>{pageNumber}</h4>
+        </div>
         <button onClick={handleNext}>Next</button>
       </div>
-      {/*<button onClick={changeTheme}>Change theme</button>*/}
-      <div className="checkbox-wrapper-22">
-        <label className="switch" htmlFor="checkbox">
-          <input type="checkbox" id="checkbox" onChange={theme.toggleTheme}/>
-          <div className="slider round"/>
+      <div className={'checkbox-wrapper-22'}>
+        <label className={'switch'} htmlFor={'checkbox'}>
+          <input type={'checkbox'} id={'checkbox'} onChange={changeTheme} />
+          <div className={'slider round'} />
         </label>
       </div>
       <button onClick={throwError}>Throw Error</button>
