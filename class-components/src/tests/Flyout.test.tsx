@@ -1,52 +1,51 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import {configureStore, Store} from '@reduxjs/toolkit';
+import { configureStore, Store } from '@reduxjs/toolkit';
 import { render, fireEvent } from '@testing-library/react';
-import {FlyoutComponent} from '../app/components/flyout/FlyoutComponent';
+import { FlyoutComponent } from '../app/components/flyout/FlyoutComponent';
 import itemReducer from '../app/slices/ItemSlice';
-import {itemsApi} from "../app/service/ItemService";
-import {RootState} from "../app/store/Store";
+import { itemsApi } from '../app/service/ItemService';
+import { RootState } from '../app/store/Store';
 
 describe('FlyoutComponent', () => {
-    let store: Store<RootState>;
+  let store: Store<RootState>;
 
-    beforeEach(() => {
-        store = configureStore({
-            reducer: {
-                items: itemReducer,
-                [itemsApi.reducerPath]: itemsApi.reducer,
-            },
-        });
-
-        // Мок функции URL.createObjectURL
-        global.URL.createObjectURL = jest.fn();
+  beforeEach(() => {
+    store = configureStore({
+      reducer: {
+        items: itemReducer,
+        [itemsApi.reducerPath]: itemsApi.reducer,
+      },
     });
 
-    afterEach(() => {
-        jest.restoreAllMocks();
-    });
+    global.URL.createObjectURL = jest.fn();
+  });
 
-    it('triggers download when download button is clicked', async () => {
-        const { getByText } = render(
-            <Provider store={store}>
-                <FlyoutComponent />
-            </Provider>
-        );
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
 
-        fireEvent.click(getByText('Download'));
+  it('triggers download when download button is clicked', async () => {
+    const { getByText } = render(
+      <Provider store={store}>
+        <FlyoutComponent />
+      </Provider>,
+    );
 
-        expect(global.URL.createObjectURL).toHaveBeenCalled();
-    });
+    fireEvent.click(getByText('Download'));
 
-    it('clears all items when unselect all button is clicked', () => {
-        const { getByText } = render(
-            <Provider store={store}>
-                <FlyoutComponent />
-            </Provider>
-        );
+    expect(global.URL.createObjectURL).toHaveBeenCalled();
+  });
 
-        fireEvent.click(getByText('Unselect all'));
+  it('clears all items when unselect all button is clicked', () => {
+    const { getByText } = render(
+      <Provider store={store}>
+        <FlyoutComponent />
+      </Provider>,
+    );
 
-        expect(store.getState().items.items).toHaveLength(0);
-    });
+    fireEvent.click(getByText('Unselect all'));
+
+    expect(store.getState().items.items).toHaveLength(0);
+  });
 });

@@ -24,8 +24,5 @@
     "noFallthroughCasesInSwitch": true,
     "allowSyntheticDefaultImports": true
   },
-  "include": [
-    "src",
-    "node_modules/jest-fetch-mock/types/index.d.ts"
-  ]
+  "include": ["src", "node_modules/jest-fetch-mock/types/index.d.ts"]
 }

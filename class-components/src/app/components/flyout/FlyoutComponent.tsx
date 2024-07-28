@@ -1,14 +1,16 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearAll } from "../../slices/ItemSlice";
+import { clearAll } from '../../slices/ItemSlice';
 import { downloadCsv } from '../../csv/CsvCreate';
-import {RootState} from "../../store/Store";
-import {IPeople} from "../../interfaces/people.interface";
-import {IFilm} from "../../interfaces/films.interface";
-import {IStarships} from "../../interfaces/starships.interface";
+import { RootState } from '../../store/Store';
+import { IPeople } from '../../interfaces/people.interface';
+import { IFilm } from '../../interfaces/films.interface';
+import { IStarships } from '../../interfaces/starships.interface';
 
 export const FlyoutComponent: React.FC = () => {
-  const items = useSelector<RootState, (IPeople | IFilm | IStarships)[]>((store) => store.items.items);
+  const items = useSelector<RootState, (IPeople | IFilm | IStarships)[]>(
+    (store) => store.items.items,
+  );
   const dispatch = useDispatch();
   const downloadRef = React.useRef<HTMLAnchorElement>(null);
 
@@ -17,10 +19,7 @@ export const FlyoutComponent: React.FC = () => {
 
     if (downloadRef.current) {
       downloadRef.current.setAttribute('href', URL.createObjectURL(blob));
-      downloadRef.current.setAttribute(
-        'download',
-        `${items.length}_items.csv`,
-      );
+      downloadRef.current.setAttribute('download', `${items.length}_items.csv`);
       downloadRef.current.click();
     }
   };

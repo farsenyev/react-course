@@ -47,30 +47,35 @@ export const SearchComponent: React.FC<Props> = ({ onSearch }) => {
   };
 
   return (
-      <div className={'header-container'}>
-        <input
-            type="text"
-            value={value}
-            onChange={handleInputChange}
-            placeholder="Search here..."
-        />
-        <button onClick={handleSearch}>Search</button>
-        <div className={'pagination-container'}>
-          <button onClick={handlePrev} disabled={pageNumber <= 1}>
-            Prev
-          </button>
-          <div className={'pagination-number'}>
-            <h4>{pageNumber}</h4>
-          </div>
-          <button onClick={handleNext}>Next</button>
+    <div className={'header-container'}>
+      <input
+        type="text"
+        value={value}
+        onChange={handleInputChange}
+        placeholder="Search here..."
+      />
+      <button onClick={handleSearch}>Search</button>
+      <div className={'pagination-container'}>
+        <button onClick={handlePrev} disabled={pageNumber <= 1}>
+          Prev
+        </button>
+        <div className={'pagination-number'}>
+          <h4>{pageNumber}</h4>
         </div>
-        <div className={'checkbox-wrapper-22'}>
-          <label className={'switch'} htmlFor={'checkbox'}>
-            <input type={'checkbox'} id={'checkbox'} onChange={changeTheme} aria-label={"Toggle Theme"}/>
-            <div className={'slider round'} />
-          </label>
-        </div>
-        <button onClick={throwError}>Throw Error</button>
+        <button onClick={handleNext}>Next</button>
       </div>
+      <div className={'checkbox-wrapper-22'}>
+        <label className={'switch'} htmlFor={'checkbox'}>
+          <input
+            type={'checkbox'}
+            id={'checkbox'}
+            onChange={changeTheme}
+            aria-label={'Toggle Theme'}
+          />
+          <div className={'slider round'} />
+        </label>
+      </div>
+      <button onClick={throwError}>Throw Error</button>
+    </div>
   );
 };

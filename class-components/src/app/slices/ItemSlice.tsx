@@ -1,7 +1,7 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {IPeople} from "../interfaces/people.interface";
-import {IFilm} from "../interfaces/films.interface";
-import {IStarships} from "../interfaces/starships.interface";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IPeople } from '../interfaces/people.interface';
+import { IFilm } from '../interfaces/films.interface';
+import { IStarships } from '../interfaces/starships.interface';
 
 interface ItemState {
   items: (IPeople | IFilm | IStarships)[];
@@ -19,9 +19,10 @@ const itemSlice = createSlice({
       state.items.push(action.payload);
     },
     removeItem(state, action: PayloadAction<IPeople | IFilm | IStarships>) {
-      const identifier = 'name' in action.payload ? action.payload.name : action.payload.title;
-      state.items = state.items.filter(item =>
-          'name' in item ? item.name !== identifier : item.title !== identifier
+      const identifier =
+        'name' in action.payload ? action.payload.name : action.payload.title;
+      state.items = state.items.filter((item) =>
+        'name' in item ? item.name !== identifier : item.title !== identifier,
       );
     },
     clearAll(state) {
