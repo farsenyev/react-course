@@ -6,7 +6,6 @@ declare global {
       toBeInTheDocument(): R;
       toHaveTextContent(text: string | RegExp): R;
       toBeVisible(): R;
-      // Add other jest-dom matchers here if needed
     }
   }
 }

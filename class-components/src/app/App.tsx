@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Navigate,
-  Route,
-  Routes,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ErrorBoundary } from './components/error/ErrorComponent';
 import { MainComponent } from './components/MainComponent';
 import { ResultsComponent } from './components/result/ResultsComponent';

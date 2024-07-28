@@ -1,61 +1,68 @@
+
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <title>Code coverage report for SearchComponent.tsx</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="prettify.css" />
     <link rel="stylesheet" href="base.css" />
     <link rel="shortcut icon" type="image/x-icon" href="favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <style type="text/css">
-      .coverage-summary .sorter {
-        background-image: url(sort-arrow-sprite.png);
-      }
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(sort-arrow-sprite.png);
+        }
     </style>
-  </head>
-
-  <body>
-    <div class="wrapper">
-      <div class="pad1">
+</head>
+    
+<body>
+<div class='wrapper'>
+    <div class='pad1'>
         <h1><a href="index.html">All files</a> SearchComponent.tsx</h1>
-        <div class="clearfix">
-          <div class="fl pad1y space-right2">
-            <span class="strong">96.55% </span>
-            <span class="quiet">Statements</span>
-            <span class="fraction">28/29</span>
-          </div>
-
-          <div class="fl pad1y space-right2">
-            <span class="strong">75% </span>
-            <span class="quiet">Branches</span>
-            <span class="fraction">3/4</span>
-          </div>
-
-          <div class="fl pad1y space-right2">
-            <span class="strong">87.5% </span>
-            <span class="quiet">Functions</span>
-            <span class="fraction">7/8</span>
-          </div>
-
-          <div class="fl pad1y space-right2">
-            <span class="strong">96.42% </span>
-            <span class="quiet">Lines</span>
-            <span class="fraction">27/28</span>
-          </div>
+        <div class='clearfix'>
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">90.32% </span>
+                <span class="quiet">Statements</span>
+                <span class='fraction'>28/31</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">42.85% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>3/7</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">71.42% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>5/7</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">90% </span>
+                <span class="quiet">Lines</span>
+                <span class='fraction'>27/30</span>
+            </div>
+        
+            
         </div>
         <p class="quiet">
-          Press <em>n</em> or <em>j</em> to go to the next uncovered block,
-          <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
+            Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
         <template id="filterTemplate">
-          <div class="quiet">
-            Filter:
-            <input type="search" id="fileSearch" />
-          </div>
+            <div class="quiet">
+                Filter:
+                <input type="search" id="fileSearch">
+            </div>
         </template>
-      </div>
-      <div class="status-line high"></div>
-      <pre><table class="coverage">
+    </div>
+    <div class='status-line high'></div>
+    <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
 <a name='L3'></a><a href='#L3'>3</a>
@@ -132,60 +139,42 @@
 <a name='L74'></a><a href='#L74'>74</a>
 <a name='L75'></a><a href='#L75'>75</a>
 <a name='L76'></a><a href='#L76'>76</a>
-<a name='L77'></a><a href='#L77'>77</a>
-<a name='L78'></a><a href='#L78'>78</a>
-<a name='L79'></a><a href='#L79'>79</a>
-<a name='L80'></a><a href='#L80'>80</a>
-<a name='L81'></a><a href='#L81'>81</a>
-<a name='L82'></a><a href='#L82'>82</a>
-<a name='L83'></a><a href='#L83'>83</a>
-<a name='L84'></a><a href='#L84'>84</a>
-<a name='L85'></a><a href='#L85'>85</a>
-<a name='L86'></a><a href='#L86'>86</a>
-<a name='L87'></a><a href='#L87'>87</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
+<a name='L77'></a><a href='#L77'>77</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">10x</span>
@@ -193,6 +182,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -220,123 +215,99 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useState, useEffect, ChangeEvent } from 'react';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useState, ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-&nbsp;
+import { useTheme } from '../../context/ThemeContext';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 &nbsp;
 interface Props {
-  onSearch: (searchTerm: string, pageNumber: number) =&gt; void
+  onSearch: (term: string, page: number) =&gt; void;
 }
 &nbsp;
 export const SearchComponent: React.FC&lt;Props&gt; = ({ onSearch }) =&gt; {
-  const [searchTerm, setSearchTerm] = useState&lt;string&gt;(
-    localStorage.getItem('searchTerm') || '',
-  );
-  const [pageNumber, setPage] = useState(1);
+  const [pageNumber, setPageNumber] = useState(1);
+  const [value, setValue] = useLocalStorage('', 'searchItem');
+  const theme = useTheme();
   const navigate = useNavigate();
 &nbsp;
-  useEffect(() =&gt; {
-    localStorage.setItem('searchTerm', searchTerm);
-&nbsp;
-    return () =&gt; {
-      localStorage.setItem('searchTerm', searchTerm);
-    };
-  }, [searchTerm]);
-&nbsp;
   const handleInputChange = (event: ChangeEvent&lt;HTMLInputElement&gt;) =&gt; {
-    setSearchTerm(event.target.value);
+    setValue(event.target.value);
   };
 &nbsp;
-  const handleSearch = () =&gt; {
-    onSearch(searchTerm, pageNumber);
-    navigate(`/search/${searchTerm}`);
+  const handleSearch = <span class="fstat-no" title="function not covered" >() =</span>&gt; {
+<span class="cstat-no" title="statement not covered" >    onSearch(value, pageNumber);</span>
+<span class="cstat-no" title="statement not covered" >    navigate(`/${value ? value : 'search'}?page=${pageNumber}`);</span>
+  };
+&nbsp;
+  const handlePrev = () =&gt; {
+    const prevPage = pageNumber - 1;
+    setPageNumber(prevPage);
+    onSearch(value, prevPage);
+    navigate(`/${value ? value : <span class="branch-1 cbranch-no" title="branch not covered" >'search'}</span>?page=${prevPage}`);
   };
 &nbsp;
   const handleNext = () =&gt; {
     const nextPage = pageNumber + 1;
-    setPage(nextPage);
-    onSearch(searchTerm, nextPage);
-    navigate(`/search/${searchTerm}?page=${nextPage}`);
-  };
-&nbsp;
-  const handlePrev = () =&gt; {
-    const prevPage = pageNumber &gt; 1 ? pageNumber - 1 : <span class="branch-1 cbranch-no" title="branch not covered" >1;</span>
-    setPage(prevPage);
-    onSearch(searchTerm, prevPage);
-    navigate(`/search/${searchTerm}/?page=${prevPage}`);
+    setPageNumber(nextPage);
+    onSearch(value, nextPage);
+    navigate(`/${value ? value : <span class="branch-1 cbranch-no" title="branch not covered" >'search'}</span>?page=${nextPage}`);
   };
 &nbsp;
   const throwError = <span class="fstat-no" title="function not covered" >() =</span>&gt; {
 <span class="cstat-no" title="statement not covered" >    throw new Error('Manual error triggered');</span>
   };
 &nbsp;
+  const changeTheme = () =&gt; {
+    if (theme) {
+      theme.toggleTheme();
+    }
+  };
+&nbsp;
   return (
-    &lt;div
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        padding: '10px',
-      }}
-    &gt;
-      &lt;input
-        type="text"
-        value={searchTerm}
-        onChange={handleInputChange}
-        placeholder="Search here..."
-      /&gt;
-      &lt;button onClick={handleSearch}&gt;Search&lt;/button&gt;
-      &lt;div style={{
-        display: "flex",
-        flexDirection: "row",
-        gap: "10px"
-      }}&gt;
-        &lt;button onClick={handlePrev} disabled={pageNumber &lt;= 1}&gt;Prev&lt;/button&gt;
-        &lt;div style={{
-          color: "black",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center"
-        }}&gt;
-          &lt;h4 style={{
-            margin: "0"
-          }}&gt;{pageNumber}&lt;/h4&gt;&lt;/div&gt;
-        &lt;button onClick={handleNext}&gt;Next&lt;/button&gt;
+      &lt;div className={'header-container'}&gt;
+        &lt;input
+            type="text"
+            value={value}
+            onChange={handleInputChange}
+            placeholder="Search here..."
+        /&gt;
+        &lt;button onClick={handleSearch}&gt;Search&lt;/button&gt;
+        &lt;div className={'pagination-container'}&gt;
+          &lt;button onClick={handlePrev} disabled={pageNumber &lt;= 1}&gt;
+            Prev
+          &lt;/button&gt;
+          &lt;div className={'pagination-number'}&gt;
+            &lt;h4&gt;{pageNumber}&lt;/h4&gt;
+          &lt;/div&gt;
+          &lt;button onClick={handleNext}&gt;Next&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;div className={'checkbox-wrapper-22'}&gt;
+          &lt;label className={'switch'} htmlFor={'checkbox'}&gt;
+            &lt;input type={'checkbox'} id={'checkbox'} onChange={changeTheme} aria-label={"Toggle Theme"}/&gt;
+            &lt;div className={'slider round'} /&gt;
+          &lt;/label&gt;
+        &lt;/div&gt;
+        &lt;button onClick={throwError}&gt;Throw Error&lt;/button&gt;
       &lt;/div&gt;
-      &lt;button onClick={throwError}&gt;Throw Error&lt;/button&gt;
-    &lt;/div&gt;
   );
 };
 &nbsp;</pre></td></tr></table></pre>
 
-      <div class="push"></div>
-      <!-- for sticky footer -->
-    </div>
-    <!-- /wrapper -->
-    <div class="footer quiet pad2 space-top1 center small">
-      Code coverage generated by
-      <a
-        href="https://istanbul.js.org/"
-        target="_blank"
-        rel="noopener noreferrer"
-        >istanbul</a
-      >
-      at 2024-07-14T18:11:41.344Z
-    </div>
-    <script src="prettify.js"></script>
-    <script>
-      window.onload = function () {
-        prettyPrint();
-      };
-    </script>
-    <script src="sorter.js"></script>
-    <script src="block-navigation.js"></script>
-  </body>
+                <div class='push'></div><!-- for sticky footer -->
+            </div><!-- /wrapper -->
+            <div class='footer quiet pad2 space-top1 center small'>
+                Code coverage generated by
+                <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
+                at 2024-07-28T16:02:50.322Z
+            </div>
+        <script src="prettify.js"></script>
+        <script>
+            window.onload = function () {
+                prettyPrint();
+            };
+        </script>
+        <script src="sorter.js"></script>
+        <script src="block-navigation.js"></script>
+    </body>
 </html>
+    

@@ -1,26 +1,27 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IPeople } from '../interfaces/people.interface';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {IPeople} from "../interfaces/people.interface";
+import {IFilm} from "../interfaces/films.interface";
+import {IStarships} from "../interfaces/starships.interface";
 
-export interface SelectedState {
-  selectedItems: IPeople[];
+interface ItemState {
+  items: (IPeople | IFilm | IStarships)[];
 }
 
-const initialState: SelectedState = {
-  selectedItems: [],
+const initialState: ItemState = {
+  items: [],
 };
 
 const itemSlice = createSlice({
   name: 'item',
-  initialState: {
-    items: [],
-  },
+  initialState,
   reducers: {
-    addItem(state, action) {
+    addItem(state, action: PayloadAction<IPeople | IFilm | IStarships>) {
       state.items.push(action.payload);
     },
-    removeItem(state, action) {
-      state.items = state.items.filter(
-        (item) => item.name !== action.payload.name,
+    removeItem(state, action: PayloadAction<IPeople | IFilm | IStarships>) {
+      const identifier = 'name' in action.payload ? action.payload.name : action.payload.title;
+      state.items = state.items.filter(item =>
+          'name' in item ? item.name !== identifier : item.title !== identifier
       );
     },
     clearAll(state) {

@@ -19,21 +19,21 @@ export const SearchComponent: React.FC<Props> = ({ onSearch }) => {
 
   const handleSearch = () => {
     onSearch(value, pageNumber);
-    navigate(`/${value}`);
+    navigate(`/${value ? value : 'search'}?page=${pageNumber}`);
   };
 
   const handlePrev = () => {
     const prevPage = pageNumber - 1;
     setPageNumber(prevPage);
     onSearch(value, prevPage);
-    navigate(`/${value}/?page=${prevPage}`);
+    navigate(`/${value ? value : 'search'}?page=${prevPage}`);
   };
 
   const handleNext = () => {
     const nextPage = pageNumber + 1;
     setPageNumber(nextPage);
     onSearch(value, nextPage);
-    navigate(`/${value}/?page=${nextPage}`);
+    navigate(`/${value ? value : 'search'}?page=${nextPage}`);
   };
 
   const throwError = () => {
@@ -41,34 +41,36 @@ export const SearchComponent: React.FC<Props> = ({ onSearch }) => {
   };
 
   const changeTheme = () => {
-    theme.toggleTheme();
+    if (theme) {
+      theme.toggleTheme();
+    }
   };
 
   return (
-    <div className={'header-container'}>
-      <input
-        type="text"
-        value={value}
-        onChange={handleInputChange}
-        placeholder="Search here..."
-      />
-      <button onClick={handleSearch}>Search</button>
-      <div className={'pagination-container'}>
-        <button onClick={handlePrev} disabled={pageNumber <= 1}>
-          Prev
-        </button>
-        <div className={'pagination-number'}>
-          <h4>{pageNumber}</h4>
+      <div className={'header-container'}>
+        <input
+            type="text"
+            value={value}
+            onChange={handleInputChange}
+            placeholder="Search here..."
+        />
+        <button onClick={handleSearch}>Search</button>
+        <div className={'pagination-container'}>
+          <button onClick={handlePrev} disabled={pageNumber <= 1}>
+            Prev
+          </button>
+          <div className={'pagination-number'}>
+            <h4>{pageNumber}</h4>
+          </div>
+          <button onClick={handleNext}>Next</button>
         </div>
-        <button onClick={handleNext}>Next</button>
+        <div className={'checkbox-wrapper-22'}>
+          <label className={'switch'} htmlFor={'checkbox'}>
+            <input type={'checkbox'} id={'checkbox'} onChange={changeTheme} aria-label={"Toggle Theme"}/>
+            <div className={'slider round'} />
+          </label>
+        </div>
+        <button onClick={throwError}>Throw Error</button>
       </div>
-      <div className={'checkbox-wrapper-22'}>
-        <label className={'switch'} htmlFor={'checkbox'}>
-          <input type={'checkbox'} id={'checkbox'} onChange={changeTheme} />
-          <div className={'slider round'} />
-        </label>
-      </div>
-      <button onClick={throwError}>Throw Error</button>
-    </div>
   );
 };

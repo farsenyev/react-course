@@ -1,6 +1,8 @@
-import { useState, useEffect } from 'react';
+import {useState, useEffect, Dispatch, SetStateAction} from 'react';
 
-export const useLocalStorage = (initialValue, key) => {
+type ReturnType = [string, Dispatch<SetStateAction<string>>];
+
+export const useLocalStorage = (initialValue: string, key: string): ReturnType => {
   const getValue = () => {
     const storage = localStorage.getItem(key);
     if (storage) return storage;
@@ -12,7 +14,7 @@ export const useLocalStorage = (initialValue, key) => {
 
   useEffect(() => {
     localStorage.setItem(key, value);
-  }, [value]);
+  }, [value, key]);
 
   return [value, setValue];
 };

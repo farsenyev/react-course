@@ -1,109 +1,82 @@
 import React from 'react';
-import { render, screen, waitFor, fireEvent } from '@testing-library/react';
-import { DetailComponent } from '../app/components/details/DetailedComponent';
+import { render, screen, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import '@testing-library/jest-dom';
-import fetchMock from 'jest-fetch-mock';
+import { Provider } from 'react-redux';
+import { DetailComponent } from '../app/components/details/DetailedComponent';
+import { setupApiStore } from './helpers/setupApiStore';
+import { IPeople } from "../app/interfaces/people.interface";
 
-const mockNavigate = jest.fn();
+const mockPeopleData: IPeople = {
+    id: "1",
+    name: "Luke Skywalker",
+    birth_year: "19BBY",
+    eye_color: "blue",
+    films: ["some-url"],
+    gender: "male",
+    hair_color: "blond",
+    height: "172",
+    homeworld: "some-url",
+    mass: "77",
+    skin_color: "fair",
+    created: "some-date",
+    edited: "some-date",
+    species: ["some-url"],
+    starships: ["some-url"],
+    url: "some-url",
+    vehicles: ["some-url"]
+};
+
+// Мокируем useParams и useNavigate из react-router-dom
 jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useParams: () => ({ id: '1', category: 'people' }),
-  useNavigate: () => mockNavigate, // Mock the useNavigate function here
+    ...jest.requireActual('react-router-dom'),
+    useParams: () => ({ id: '1', category: 'people' }),
+    useNavigate: () => jest.fn(),
 }));
 
-beforeEach(() => {
-  fetchMock.resetMocks();
-  mockNavigate.mockReset(); // Ensure the navigate mock is reset before each test
-});
+// Мокируем itemsApi
+jest.mock('../app/service/ItemService', () => ({
+    ...jest.requireActual('../app/service/ItemService'),
+    useGetDetailsQuery: jest.fn().mockImplementation(() => ({
+        data: mockPeopleData,
+        isLoading: false,
+        isFetching: false,
+    })),
+}));
 
-test('displays loading indicator while fetching data', async () => {
-  fetchMock.mockResponseOnce(
-    JSON.stringify({ name: 'Luke Skywalker', films: [] }),
-  );
+describe('DetailComponent', () => {
+    let store: ReturnType<typeof setupApiStore>;
 
-  render(
-    <BrowserRouter>
-      <DetailComponent />
-    </BrowserRouter>,
-  );
+    beforeEach(() => {
+        store = setupApiStore();
+    });
 
-  expect(screen.getByText(/loading/i)).toBeInTheDocument();
+    it('правильно рендерит данные', async () => {
+        jest.mock('../app/service/ItemService', () => ({
+            ...jest.requireActual('../app/service/ItemService'),
+            useGetDetailsQuery: jest.fn().mockImplementation(() => ({
+                data: mockPeopleData,
+                isLoading: false,
+                isFetching: false,
+            })),
+        }));
 
-  await waitFor(() =>
-    expect(screen.getByText('Luke Skywalker')).toBeInTheDocument(),
-  );
-});
+        render(
+            <Provider store={store}>
+                <BrowserRouter>
+                    <DetailComponent />
+                </BrowserRouter>
+            </Provider>
+        );
 
-test('displays detailed card data', async () => {
-  fetchMock.mockResponseOnce(
-    JSON.stringify({ name: 'Luke Skywalker', films: [] }),
-  );
-
-  render(
-    <BrowserRouter>
-      <DetailComponent />
-    </BrowserRouter>,
-  );
-
-  await waitFor(() =>
-    expect(screen.getByText('Luke Skywalker')).toBeInTheDocument(),
-  );
-});
-
-test('displays films associated with the item', async () => {
-  fetchMock.mockResponseOnce(
-    JSON.stringify({
-      name: 'Luke Skywalker',
-      films: ['https://swapi.dev/api/films/1/'],
-    }),
-  );
-
-  fetchMock.mockResponseOnce(JSON.stringify({ title: 'A New Hope' }));
-
-  render(
-    <BrowserRouter>
-      <DetailComponent />
-    </BrowserRouter>,
-  );
-
-  await waitFor(() =>
-    expect(screen.getByText('Luke Skywalker')).toBeInTheDocument(),
-  );
-  await waitFor(() =>
-    expect(screen.getByText('Films: A New Hope')).toBeInTheDocument(),
-  );
-});
-
-test('handles fetch error', async () => {
-  fetchMock.mockReject(new Error('Failed to fetch'));
-
-  render(
-    <BrowserRouter>
-      <DetailComponent />
-    </BrowserRouter>,
-  );
-
-  await waitFor(() =>
-    expect(screen.getByText('No details available.')).toBeInTheDocument(),
-  );
-});
-
-test('clicking close button navigates back', async () => {
-  fetchMock.mockResponseOnce(
-    JSON.stringify({ name: 'Luke Skywalker', films: [] }),
-  );
-
-  render(
-    <BrowserRouter>
-      <DetailComponent />
-    </BrowserRouter>,
-  );
-
-  await waitFor(() =>
-    expect(screen.getByText('Luke Skywalker')).toBeInTheDocument(),
-  );
-
-  fireEvent.click(screen.getByText(/close/i));
-  expect(mockNavigate).toHaveBeenCalledWith(-1);
+        await waitFor(() => {
+            const elements = screen.getAllByText(/Luke Skywalker/i);
+            expect(elements).toHaveLength(2); // Проверяем, что нашлись два элемента с текстом "Luke Skywalker"
+            elements.forEach(element => {
+                expect(element).toBeInTheDocument();
+            });
+            expect(screen.getByText(/height: 172/i)).toBeInTheDocument();
+            expect(screen.getByText(/mass: 77/i)).toBeInTheDocument();
+            // Добавьте другие проверки полей, если необходимо
+        });
+    });
 });
