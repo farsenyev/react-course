@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ErrorBoundary } from './components/error/ErrorComponent';
 import { MainComponent } from './components/MainComponent';
 import { ResultsComponent } from './components/result/ResultsComponent';
-import { DetailComponent } from './components/details/DetailedComponent';
+import { DetailComponent } from './components/details/DetailComponent';
 import { NotFoundPage } from './components/404/NotFoundPage';
 
 export const App = () => {

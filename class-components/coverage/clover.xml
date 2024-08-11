@@ -4,7 +4,7 @@
     <metrics statements="131" coveredstatements="120" conditionals="49" coveredconditionals="28" methods="40" coveredmethods="32" elements="220" coveredelements="180" complexity="0" loc="131" ncloc="131" packages="9" files="9" classes="9"/>
     <package name="app.components.details">
       <metrics statements="16" coveredstatements="15" conditionals="11" coveredconditionals="7" methods="4" coveredmethods="3"/>
-      <file name="DetailedComponent.tsx" path="/Users/ted/Desktop/projects/epam/react-course/class-components/src/app/components/details/DetailedComponent.tsx">
+      <file name="DetailComponent.tsx" path="/Users/ted/Desktop/projects/epam/react-course/class-components/src/app/components/details/DetailComponent.tsx">
         <metrics statements="16" coveredstatements="15" conditionals="11" coveredconditionals="7" methods="4" coveredmethods="3"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
