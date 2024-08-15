@@ -3,10 +3,10 @@ import formReducer from './formSlice';
 import countriesReducer from './countriesSlice';
 
 const store = configureStore({
-    reducer: {
-        forms: formReducer,
-        countries: countriesReducer,
-    },
+  reducer: {
+    forms: formReducer,
+    countries: countriesReducer,
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
